@@ -50,12 +50,13 @@ app.get('/api/clients/rut', async (req, res) => {
     res.json(list);
 });
 
-// Agregar cliente nuevo (debe incluir al menos RUT o al menos una cuenta de ahorro)
+// Agregar cliente nuevo (según reglas de negocio: RUT es obligatorio para todos los clientes)
 app.post('/api/clients', async (req, res) => {
     const { name, rutAccount, savingAccounts } = req.body;
     if (!name) return res.status(400).json({ error: 'Nombre requerido' });
-    if (!rutAccount && (!savingAccounts || savingAccounts.length === 0)) {
-        return res.status(400).json({ error: 'El cliente debe tener al menos una cuenta: RUT o AHORRO' });
+    // Regla: cada cliente debe tener una cuenta RUT. No se permiten clientes con solo cuentas de ahorro.
+    if (!rutAccount) {
+        return res.status(400).json({ error: 'Cuenta RUT obligatoria al crear un cliente' });
     }
 
     const data = await loadData();
@@ -99,6 +100,11 @@ app.post('/api/clients/:id/savings', async (req, res) => {
     const client = data.clients.find(c => c.id === req.params.id);
     if (!client) return res.status(404).json({ error: 'Cliente no encontrado' });
 
+    // Regla: no se puede agregar cuenta de ahorro a un cliente que no tenga cuenta RUT
+    if (!client.rutAccount) {
+        return res.status(400).json({ error: 'No se puede agregar cuenta de ahorro: el cliente no tiene cuenta RUT' });
+    }
+
     const account = { id: genId('s_'), number: number || '', balance: balance || 0 };
     client.savingAccounts = client.savingAccounts || [];
     client.savingAccounts.push(account);
@@ -122,13 +128,11 @@ app.delete('/api/clients/:id/rut', async (req, res) => {
     const client = data.clients.find(c => c.id === req.params.id);
     if (!client) return res.status(404).json({ error: 'Cliente no encontrado' });
     if (!client.rutAccount) return res.status(400).json({ error: 'Cliente no tiene cuenta RUT' });
-    // Validación: no dejar cliente sin ninguna cuenta
-    if (!client.savingAccounts || client.savingAccounts.length === 0) {
-        return res.status(400).json({ error: 'No se puede eliminar la cuenta RUT: el cliente quedaría sin cuentas' });
-    }
-    client.rutAccount = null;
-    await saveData(data);
-    res.json(client);
+    // Según reglas de negocio actualizadas:
+    // - La cuenta RUT es obligatoria para los clientes (no se permiten clientes sin RUT).
+    // - Además, no es válido que existan cuentas de ahorro sin una cuenta RUT.
+    // Por lo tanto, no permitimos eliminar la cuenta RUT de un cliente.
+    return res.status(400).json({ error: 'Operación no permitida: no se puede eliminar la cuenta RUT. Para eliminar todas las cuentas, elimine el cliente con DELETE /api/clients/:id' });
 });
 
 // Eliminar cuenta de AHORRO por id

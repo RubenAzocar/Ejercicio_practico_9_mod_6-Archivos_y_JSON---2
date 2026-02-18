@@ -51,6 +51,7 @@ Abrir el navegador en: http://localhost:3000
 - `POST /api/clients/:id/savings` — Agregar cuenta de ahorro a cliente existente
 - `DELETE /api/clients/:id` — Eliminar cliente y todas sus cuentas
 - `DELETE /api/clients/:id/rut` — Eliminar cuenta RUT (solo si queda al menos otra cuenta)
+- `DELETE /api/clients/:id/rut` — Eliminar cuenta RUT
 - `DELETE /api/clients/:id/savings/:accId` — Eliminar cuenta de ahorro por id
 
 ### Ejemplos rápidos (curl)
@@ -79,6 +80,13 @@ Los datos se persisten en `data/clients.json` con la siguiente estructura mínim
 	]
 }
 ```
+
+
+## Reglas de negocio (implementadas)
+
+- Cada cliente debe contar obligatoriamente con una cuenta RUT al ser creado. No se permiten clientes que solo tengan cuentas de ahorro.
+- Una cuenta RUT es obligatoria para poder poseer cuentas de ahorro; por tanto, no se puede agregar una cuenta de ahorro a un cliente que no tenga RUT.
+- No se permite eliminar la cuenta RUT de un cliente mediante `DELETE /api/clients/:id/rut`. Para eliminar todas las cuentas y eliminar el registro del cliente, use `DELETE /api/clients/:id`.
 
 ## Notas de seguridad y uso
 

@@ -21,7 +21,7 @@ async function renderClients(list) {
     const cont = el('#clients-list');
     if (!list || list.length === 0) { cont.innerHTML = '<p>No hay clientes.</p>'; return; }
     // Render sin mostrar ids internos: mostrar solo número y saldo de cuentas
-    // Mostrar solo información legible: nombre, número y saldo (ocultar ids internas)
+    // Mostrar solo la información solicitada: nombre, número de cuenta y saldo (sin IDs internas)
     cont.innerHTML = list.map(c => {
         const rut = c.rutAccount ? `<div><strong>RUT</strong> ${c.rutAccount.number} - $${c.rutAccount.balance}</div>` : '';
         const savings = (c.savingAccounts || []).map(s => `<li>${s.number} - $${s.balance}</li>`).join('');
