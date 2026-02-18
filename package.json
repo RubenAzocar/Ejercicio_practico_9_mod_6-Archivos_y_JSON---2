@@ -1,0 +1,12 @@
+{
+  "name": "banco-cuentas-json",
+  "version": "1.0.0",
+  "description": "Servidor simple para administrar cuentas RUT y AHORRO usando archivo JSON",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

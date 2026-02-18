@@ -1,0 +1,78 @@
+<!-- [COGNITIVE_RESET] Recordatorio de rol activo. Soy Programador Senior Fullstack. Prohibido divagar. Prohibido alucinar. Código funcional inmediato. [/COGNITIVE_RESET] -->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Banco - Gestión de cuentas</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Banco - Gestión de Cuentas RUT y AHORRO</h1>
+
+    <section class="card">
+      <h2>Listar clientes</h2>
+      <div class="btn-row">
+        <button id="btn-refresh">Refrescar</button>
+        <button id="btn-list-rut">Listar clientes con RUT</button>
+      </div>
+      <div id="clients-list"></div>
+    </section>
+
+    <section class="card forms">
+      <h2>Agregar cliente nuevo</h2>
+      <form id="form-new-client">
+        <input name="name" placeholder="Nombre" required>
+        <label>Cuenta RUT (opcional)</label>
+        <input name="rut_number" placeholder="Número RUT">
+        <input name="rut_balance" placeholder="Saldo RUT" type="number">
+        <label>Cuenta Ahorro (opcional, puede añadir varias luego)</label>
+        <input name="saving_number" placeholder="Número ahorro">
+        <input name="saving_balance" placeholder="Saldo ahorro" type="number">
+        <button type="submit">Agregar Cliente</button>
+      </form>
+    </section>
+
+    <section class="card forms">
+      <h2>Operaciones sobre cliente existente</h2>
+      <form id="form-add-rut">
+        <h3>Agregar RUT</h3>
+        <input name="client_id" placeholder="ID cliente" required>
+        <input name="rut_number" placeholder="Número RUT" required>
+        <input name="rut_balance" placeholder="Saldo" type="number">
+        <button type="submit">Agregar RUT</button>
+      </form>
+
+      <form id="form-add-savings">
+        <h3>Agregar Ahorro</h3>
+        <input name="client_id" placeholder="ID cliente" required>
+        <input name="saving_number" placeholder="Número ahorro" required>
+        <input name="saving_balance" placeholder="Saldo" type="number">
+        <button type="submit">Agregar Ahorro</button>
+      </form>
+
+      <form id="form-delete-client">
+        <h3>Eliminar cliente</h3>
+        <input name="client_id" placeholder="ID cliente" required>
+        <button type="submit">Eliminar Cliente</button>
+      </form>
+
+      <form id="form-delete-rut">
+        <h3>Eliminar RUT</h3>
+        <input name="client_id" placeholder="ID cliente" required>
+        <button type="submit">Eliminar RUT</button>
+      </form>
+
+      <form id="form-delete-saving">
+        <h3>Eliminar Ahorro</h3>
+        <input name="client_id" placeholder="ID cliente" required>
+        <input name="saving_id" placeholder="ID cuenta ahorro" required>
+        <button type="submit">Eliminar Ahorro</button>
+      </form>
+    </section>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

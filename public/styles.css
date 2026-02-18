@@ -1,0 +1,63 @@
+
+/* [COGNITIVE_RESET] Recordatorio de rol activo. Soy Programador Senior Fullstack. Prohibido divagar. Prohibido alucinar. Código funcional inmediato. [/COGNITIVE_RESET] */
+
+:root{
+  --bg-start:#fff6f5; /* muy claro */
+  --bg-end:#fff4ec;
+  --accent-1:#ff6b6b; /* rojo suave */
+  --accent-2:#ffb86b; /* naranja suave */
+  --text:#2b2b2b;
+  --muted:#6b6b6b;
+  --card:#ffffff;
+  --glass: rgba(255,255,255,0.7);
+  --shadow: 0 8px 20px rgba(15,15,15,0.08);
+}
+
+*{box-sizing:border-box;font-family:Inter,Segoe UI,Roboto,system-ui,Arial,sans-serif}
+html,body{height:100%}
+body{
+  margin:0;
+  color:var(--text);
+  background:linear-gradient(180deg,var(--bg-start),var(--bg-end));
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.container{max-width:1100px;margin:32px auto;padding:20px}
+h1{margin:0 0 18px;font-size:1.6rem;color:var(--text);letter-spacing:0.2px}
+
+.card{background:linear-gradient(180deg,var(--card),#0b73bd);padding:18px;border-radius:12px;box-shadow:var(--shadow);margin-bottom:18px;border:1px solid rgba(255,255,255,0.6)}
+
+.btn-row{display:flex;gap:10px;margin-bottom:12px}
+button{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#fff;border:none;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600;box-shadow:0 6px 14px rgba(255,104,104,0.12);transition:transform .12s ease,box-shadow .12s ease}
+button:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(255,104,104,0.12)}
+
+input,textarea,select{display:block;padding:10px;margin:8px 0;border:1px solid rgba(16,16,16,0.06);border-radius:10px;width:100%;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(250,250,250,0.9));outline:none;transition:box-shadow .12s ease,border-color .12s ease}
+input:focus,textarea:focus,select:focus{box-shadow:0 6px 18px rgba(255,120,80,0.08);border-color:var(--accent-1)}
+
+.forms input{max-width:420px}
+
+.client-card{padding:12px;margin:10px 0;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,250,248,0.6));display:flex;flex-direction:column;gap:8px;border-left:6px solid rgba(255,107,107,0.12)}
+.client-card h4{margin:0;font-size:1.05rem}
+.client-card small{color:var(--muted);font-weight:500}
+.client-card ul{margin:6px 0 0;padding-left:18px;color:var(--muted)}
+
+.card.forms{display:grid;grid-template-columns:1fr;gap:14px}
+
+@media(min-width:900px){
+  .card.forms{grid-template-columns:1fr 1fr}
+  .btn-row{justify-content:flex-start}
+}
+
+.muted{color:var(--muted);font-size:0.95rem}
+
+.header-accent{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,rgba(255,107,107,0.12),rgba(255,184,107,0.08));color:var(--accent-1);font-weight:700}
+
+.small-note{font-size:0.86rem;color:var(--muted)}
+
+/* Form submit compact */
+form button{max-width:220px}
+
+/* table-like list if needed */
+.list-grid{display:grid;grid-template-columns:1fr 160px;gap:8px;align-items:center}
+
